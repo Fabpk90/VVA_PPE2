@@ -1,4 +1,4 @@
 
   <footer>
-    <p> Santoro Fabrizio </p>
+    <p> Santoro Fabrizio <<?php echo getdate()["year"]; ?></p>
   </footer>
