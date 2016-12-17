@@ -7,9 +7,13 @@
     <script src="script/js/jquery.min.js"></script>
     <script src="script/js/bootstrap.min.js"></script>
   </head>
+  <?php include("header.php") ?>
   <body>
-
-    <h1>Test </h1>
-
+    <div class="page-header">
+      <h1>Test </h1>
+    </div>
   </body>
+
+<?php include("footer.php") ?>
+
 </html>
