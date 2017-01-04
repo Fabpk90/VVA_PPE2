@@ -1,15 +1,14 @@
 <?php
-  include('../php/utils.php');
-  include_once('../php/connection_bdd.php');
-  include('controleur/news.php');
-
-  createHeaderPage("the news");
+  include('../../../header.php');
+  include('../controleur/news.php');
 
 
-global $message;
+//global $message;
+//echo $message;
 
-echo $message;
-
+?>
+<div class="text-center">
+<?php
 if(isset($news))
 {
   foreach($news as $new)
@@ -24,8 +23,12 @@ if(isset($news))
   }
   if(isset($commentForm))
     echo $commentForm;
+?>
 
-  global $commentaires;
+</div>
+
+<?php
+/*  global $commentaires;
   //affiche les commentaires si présents
   if(isset($commentaires))
   {
@@ -34,7 +37,10 @@ if(isset($news))
   else if(isset($_GET['newsID']))
   {
     echo '<p>No Comments here..</p>';
-  }
+  }*/
+}
+else {
+  echo "salut";
 }
 
 

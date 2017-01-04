@@ -1,9 +1,9 @@
 <?php
-
+include_once("connectionBDD.php");
 $limiteContenu = 100;
 
 //renvoie toutes les news, en affichant les premiers 100 caractères
-//ou complètement mais dans rayon de news ex: de la première à la 5ième
+//ou complètement, si $newsEnd = MAX, mais dans rayon de news ex: de la première à la 5ième
 function get_news($newsOffset, $newsEnd)
 {
   global $bdd;
@@ -11,16 +11,19 @@ function get_news($newsOffset, $newsEnd)
 
   if($newsOffset != 'MAX')
   {
-      $req = $bdd->prepare('SELECT NEWS_DATE, NEWS_CONTENU, NEWS_TITRE FROM NEWS LIMIT '.$newsOffset.', '.$newsEnd);
+      $req = $bdd->prepare('SELECT IDNEWS, DTNEWS, LIBNEWS, TITRENEWS FROM NEWS LIMIT '.$newsOffset.', '.$newsEnd);
 
       $req->execute();
+
+      print_r($req);
+
       $news = $req->fetchAll();
   }
   else
   {
-      $req = $bdd->prepare('SELECT NEWS_ID, NEWS_AUTEUR, NEWS_DATE, SUBSTRING(NEWS_CONTENU, 1, '.$limiteContenu.') AS NEWS_CONTENU, NEWS_TITRE FROM NEWS');
-
+      $req = $bdd->prepare('SELECT IDNEWS, DTNEWS, TITRENEWS, SUBSTRING(LIBNEWS, 1, '.$limiteContenu.') AS LIBNEWS FROM NEWS');
       $req->execute();
+
       $news = $req->fetchAll();
   }
 
@@ -32,7 +35,7 @@ function get_single_news($newsID)
 {
   global $bdd;
 
-  $req = $bdd->prepare('SELECT NEWS_DATE, NEWS_CONTENU, NEWS_TITRE FROM NEWS WHERE NEWS_ID ='.$newsID);
+  $req = $bdd->prepare('SELECT DTNEWS, LIBNEWS, TITRENEWS FROM NEWS WHERE IDNEWS ='.$newsID);
 
   $req->execute();
   $news = $req->fetch();

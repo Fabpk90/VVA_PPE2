@@ -1,6 +1,33 @@
 <?php
-include('modele/news.php');
+include('../modele/news.php');
 
+
+
+
+$news = get_news('MAX', 0);
+
+foreach ($news as $key => $new)
+{
+  $news[$key]['titre'] = $new['TITRENEWS'];
+  if(strlen($new['LIBNEWS']) == $limiteContenu)
+    $news[$key]['contenu'] = $new['LIBNEWS'].'...' . '<a href="script/php/vue/news.php?newsID='.$new['IDNEWS'].'"> Lire la suite </a>';
+  else
+    $news[$key]['contenu'] = $new['LIBNEWS'];
+  $news[$key]['date'] = $new['DTNEWS'];
+  //$news[$key]['comm'] = '<a onclick="loadPage(' ."'" .'news.php?newsID='.$new['NEWS_ID']. "')". '" href="#"> Comments </a>';
+}
+
+
+
+
+
+
+
+
+
+
+
+/*
 //affiche tuote les news si aucun parmètre es donné,
 //si donné affiche la news en param mais en entier
 if(isset($_POST['news_id']) && isset($_POST['comm_desc']))
@@ -86,3 +113,4 @@ else
 global $bdd;
 
 $bdd = null;
+*/
