@@ -1,26 +1,19 @@
 <?php
-include('../modele/forum.php');
+include('../modele/forum_index.php');
 
-if (isset($_SESSION['USER'])) {
+//if the user exists show the topics
+//and if param show the topic's posts
+//if not show the form
 
-  if(!isset($_GET['topic']))
-  {
-    //afficher les topics
+if (isset($_SESSION['USER']))
+{
 
-    echo '<div class="text-center">';
-    $topics = getTopics();
+  header('Location: forum_topics.php');     
 
-    foreach ($topics as $topic) {
-      echo '<p><a href="forum.php?topic='.$topic['IDTOPIC'].'" >'.$topic['TITRETOPIC']." </a> </p>";
-      echo "<p>".$topic['DESCTOPIC']."</p>";
-      echo "<p>".$topic['DTCREATIONTOPIC']."</p>";
-      echo "<p>".$topic['USER']."</p> <br/>";
-    }
-    echo "</div>";
-  }
+/*
   else{
     echo '<div class="text-center">';
-    $posts = getPost($_GET['topic']);
+    $posts = getPosts($_GET['topic']);
 
     foreach ($posts as $post)
     {
@@ -28,8 +21,18 @@ if (isset($_SESSION['USER'])) {
       echo "<p>".$post['DTPOST']."</p>";
       echo "<p>".$post['LIBPOST']."</p> <br/>";
     }
-    echo "</div>";
-  }
+    //create the posts form
+    ?>
+    <form action="forum_index.php?topic=<?php echo $_GET['topic']; ?>" method="post">
+      Votre réponse<br/>
+      <textarea name="post_rep" form="forum" rows="10" cols="50" style="width: 100%;" required></textarea>
+      <br/>
+      <button type="submit"> Envoyer votre réponse</button>
+    </form>
+  </div>
+
+  <?php
+}*/
 
 }
 else if(isset($_POST['USER']) && isset($_POST['MDP']))
@@ -61,7 +64,7 @@ else if(isset($_POST['USER']) && isset($_POST['MDP']))
 else {
   ?>
 
-  <form action="forum.php" method="POST">
+  <form action="forum_index.php" method="POST">
 
     Nom: <input type="text" name="USER"></input> <br/>
     Mot de passe: <input type="text" name="MDP"></input> <br/>

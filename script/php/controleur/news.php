@@ -1,9 +1,6 @@
 <?php
 include('../modele/news.php');
 
-
-
-
 $news = get_news('MAX', 0);
 
 foreach ($news as $key => $new)
@@ -16,14 +13,6 @@ foreach ($news as $key => $new)
   $news[$key]['date'] = $new['DTNEWS'];
   //$news[$key]['comm'] = '<a onclick="loadPage(' ."'" .'news.php?newsID='.$new['NEWS_ID']. "')". '" href="#"> Comments </a>';
 }
-
-
-
-
-
-
-
-
 
 
 

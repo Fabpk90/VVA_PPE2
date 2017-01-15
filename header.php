@@ -19,7 +19,7 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li ><a href="news.php">News </a></li>
-        <li><a href="forum.php">Forum</a></li>
+        <li><a href="forum_index.php">Forum</a></li>
         <?php
         if(isset($_SESSION['USER']))
           echo '<p class="navbar-text navbar-right"> Bienvenue! '.$_SESSION['USER'].' </p>';

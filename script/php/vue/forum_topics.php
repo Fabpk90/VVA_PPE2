@@ -1,6 +1,6 @@
 <?php
   include('../../../header.php');
-  include('../controleur/forum.php');
+  include('../controleur/forum_topics.php');
 
 
 ?>

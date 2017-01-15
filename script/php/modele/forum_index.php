@@ -49,30 +49,5 @@
      return $res->fetch();
   }
 
-  function getTopics()
-  {
-    global $bdd;
-
-    $query = "SELECT *
-              FROM TOPIC AS T";
-
-     $res = $bdd->prepare($query);
-     $res->execute();
-
-     return $res->fetchALL();
-  }
-
-  function getPost($idTopic)
-  {
-    global $bdd;
-
-    $query = "SELECT T.USER, DTPOST, LIBPOST
-              FROM TOPIC AS T, POST AS P
-              WHERE T.IDTOPIC = '".$idTopic."' AND T.IDTOPIC = P.IDTOPIC";
-
-     $res = $bdd->prepare($query);
-     $res->execute();
-
-     return $res->fetchALL();
-  }
+  
 ?>
