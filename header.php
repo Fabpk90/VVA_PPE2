@@ -18,12 +18,19 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li ><a href="news.php">News </a></li>
-        <li><a href="forum_index.php">Forum</a></li>
+        <li class="navbar-text" ><a href="news.php">News </a></li>
+        <li class="navbar-text"><a href="forum_index.php">Forum</a></li>
         <?php
         if(isset($_SESSION['USER']))
-          echo '<p class="navbar-text navbar-right"> Bienvenue! '.$_SESSION['USER'].' </p>';
+        {
+          echo '<div class="navbar-text navbar-right">';
+            echo '<p class="navbar-text"> Bienvenue! '.$_SESSION['USER'].' </p>';
+            echo '<p class="navbar-text"><a href="deconnexion.php"> Déconnexion</a> </p>';
+          echo '</div>';
+        }
         ?>
+
+
       </ul>
 
 

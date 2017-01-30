@@ -8,7 +8,7 @@ include('../modele/forum_index.php');
 if (isset($_SESSION['USER']))
 {
 
-  header('Location: forum_topics.php');     
+  header('Location: forum_topics.php');
 
 /*
   else{
@@ -39,11 +39,15 @@ else if(isset($_POST['USER']) && isset($_POST['MDP']))
 {
     $req = userExists($_POST['USER'], $_POST['MDP']);
 
+    //l'utilisateur éxiste
     if($req)
     {
       echo "Tu existe!";
 
       $isEncadrant = getEncadrant($_POST['USER']);
+
+      $_SESSION['USER'] = $_POST['USER'];
+      $_SESSION['TYPEPROFiL'] = getProfil($_SESSION['USER'])['TYPEPROFIL'];
 
       if($isEncadrant != null)
       {
@@ -54,7 +58,8 @@ else if(isset($_POST['USER']) && isset($_POST['MDP']))
         echo " loisant";
       }
 
-      $_SESSION['USER'] = $_POST['USER'];
+
+
     }
     else
     {

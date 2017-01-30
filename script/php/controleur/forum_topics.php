@@ -2,9 +2,11 @@
 
 include('../modele/forum_topics.php');
 
+echo '<div class="container-fluid">';
 //afficher les topics
 if(!isset($_GET['topic']))
 {
+
   echo '<div class="text-center">';
   $topics = getTopics();
 
@@ -20,25 +22,46 @@ if(!isset($_GET['topic']))
 }
 else
 {
-  echo '<div class="text-center">';
-  $posts = getPosts($_GET['topic']);
+    //contrôle si l'utilisateur peut voir le sujet
+    if(isTopicAccessible($_GET['topic'], $_SESSION['TYPEPROFiL']))
+    {
+        //si l'utilisateur a répondu, on inscrit sa rép et après on affiche le tout
+        if(isset($_POST['post_rep']))
+        {
+          addPost($_GET['topic'], $_POST['post_rep'], $_SESSION['USER']);
+        }
 
-  foreach ($posts as $post)
-  {
-    echo "<p>".$post['USER']."</p>";
-    echo "<p>".$post['DTPOST']."</p>";
-    echo "<p>".$post['LIBPOST']."</p> <br/>";
+        echo '<div class="text-center">';
+        $posts = getPosts($_GET['topic']);
+
+        foreach ($posts as $post)
+        {
+          echo '<div class="row"';
+            echo "<p>".$post['USER']."</p>";
+            echo "<p>".$post['DTPOST']."</p>";
+            echo "<p>".$post['LIBPOST']."</p> <br/>";
+          echo '</div>';
+        }
+        //create the posts form
+        ?>
+        <div class="form-group">
+
+          <textarea name="post_rep" form="forum" rows="10" cols="50" style="width: 100%;" class="form-control" required></textarea>
+          <form id="forum" action="forum_topics.php?topic=<?php echo $_GET['topic']; ?>" method="post">
+            <br/>
+            <button type="submit" class="btn btn-default"> Envoyer votre réponse</button>
+          </form>
+        </div>
+      </div>
+      <?php
+    }
+    else {
+      echo "Vous n'avez pas l'autorisation de voir ce topic!";
+    }
+
   }
-  //create the posts form
-  ?>
-  <form action="forum_topics.php?topic=<?php echo $_GET['topic']; ?>" method="post">
-    Votre réponse<br/>
-    <textarea name="post_rep" form="forum" rows="10" cols="50" style="width: 100%;" required></textarea>
-    <br/>
-    <button type="submit"> Envoyer votre réponse</button>
-  </form>
-</div>
-<?php
-}
+
+//container
+echo "</div>";
 
 ?>

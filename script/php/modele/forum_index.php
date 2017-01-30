@@ -49,5 +49,31 @@
      return $res->fetch();
   }
 
-  
+  function getLoisant($user)
+  {
+    global $bdd;
+
+    $query = "SELECT *
+              FROM LOISANT AS L
+              WHERE L.USER = '".$user."'";
+
+     $res = $bdd->prepare($query);
+     $res->execute();
+
+     return $res->fetch();
+  }
+
+  function getProfil($user)
+  {
+    global $bdd;
+
+    $query = "SELECT *
+              FROM PROFIL AS P
+              WHERE P.USER = '".$user."'";
+
+     $res = $bdd->prepare($query);
+     $res->execute();
+
+     return $res->fetch();
+  }
 ?>

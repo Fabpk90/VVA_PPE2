@@ -2,6 +2,7 @@
 
   include_once("connectionBDD.php");
 
+//TO DO: les topic fermer ne pas afficher -> req à modifier
 function getTopics()
 {
   global $bdd;
@@ -29,6 +30,25 @@ function getPosts($idTopic)
    return $res->fetchAll();
 }
 
+//on cherche si le profil est autorisé à voir le topic, si oui true sinon false
+function isTopicAccessible($idTopic, $typeProfil)
+{
+  global $bdd;
+
+  $query = "SELECT *
+            FROM AUTORISATION
+            WHERE TYPEPROFIL='".$typeProfil."' AND IDTOPIC = ".$idTopic;
+
+   $res = $bdd->prepare($query);
+   $res->execute();
+  //$res->fetch();
+
+   $res = $res->fetch();
+
+   //si le profil n'est pas autorisé à accéder à ce topic -> false
+   return $res != null ? true : false;
+}
+
 function addPost($idTopic, $libPost, $user)
 {
   global $bdd;
@@ -38,18 +58,30 @@ function addPost($idTopic, $libPost, $user)
                  WHERE IDTOPIC = ".$idTopic;
 
   $nbPost = $bdd->prepare($queryCount);
-  $nbPost = $nbPost->execute();
-  $nbPost = $nbPost->fetch();
+  $nbPost->execute();
+  $nbPost = $nbPost->fetch()['NBPOST'];
 
-  print_r($nbPost);
 
   $query = "INSERT INTO `act_vva_ppe2`.`post` (`IDTOPIC`, `NOPOST`, `USER`, `DTPOST`, `LIBPOST`)
-  VALUES ('".$idTopic."', '".$nbPost['NBPOST']."', '".$user."', NOW(), '".$libPost."');";
+  VALUES ('".$idTopic."', '".$nbPost."', '".$user."', NOW(), '".$libPost."');";
 
    $res = $bdd->prepare($query);
    $res->execute();
 
-   return $req == null ? false : true;
+   return $res == null ? false : true;
+}
+
+function addTopic($topicName, $topicDesc, $user)
+{
+  global $bdd;
+
+  $query = "INSERT INTO `act_vva_ppe2`.`topic` (`USER`, `TITRETOPIC`, `DESCTOPIC`, `DTCREATIONTOPIC`, `DTFERMETURE`)
+  VALUES ('".$user."', '".$topicName."', '".$topicDesc."', NOW(), NULL);";
+
+  $res = $bdd->prepare($query);
+  $res->execute();
+
+  return $res == null ? false : true;
 }
 
 ?>
