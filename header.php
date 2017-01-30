@@ -24,7 +24,8 @@
         if(isset($_SESSION['USER']))
         {
           echo '<div class="navbar-text navbar-right">';
-            echo '<p class="navbar-text"> Bienvenue! '.$_SESSION['USER'].' </p>';
+            echo '<h4 class="navbar-text"> Bienvenue! '.$_SESSION['USER'].' </h4>';
+            echo '<p class="navbar-text"><a href="forum_create.php"> Nouveau Topic</a> </p>';
             echo '<p class="navbar-text"><a href="deconnexion.php"> Déconnexion</a> </p>';
           echo '</div>';
         }

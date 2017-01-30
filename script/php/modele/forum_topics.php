@@ -37,11 +37,10 @@ function isTopicAccessible($idTopic, $typeProfil)
 
   $query = "SELECT *
             FROM AUTORISATION
-            WHERE TYPEPROFIL='".$typeProfil."' AND IDTOPIC = ".$idTopic;
+            WHERE TYPEPROFIL = '".$typeProfil."' AND IDTOPIC = ".$idTopic;
 
    $res = $bdd->prepare($query);
    $res->execute();
-  //$res->fetch();
 
    $res = $res->fetch();
 
@@ -61,7 +60,6 @@ function addPost($idTopic, $libPost, $user)
   $nbPost->execute();
   $nbPost = $nbPost->fetch()['NBPOST'];
 
-
   $query = "INSERT INTO `act_vva_ppe2`.`post` (`IDTOPIC`, `NOPOST`, `USER`, `DTPOST`, `LIBPOST`)
   VALUES ('".$idTopic."', '".$nbPost."', '".$user."', NOW(), '".$libPost."');";
 
@@ -70,18 +68,4 @@ function addPost($idTopic, $libPost, $user)
 
    return $res == null ? false : true;
 }
-
-function addTopic($topicName, $topicDesc, $user)
-{
-  global $bdd;
-
-  $query = "INSERT INTO `act_vva_ppe2`.`topic` (`USER`, `TITRETOPIC`, `DESCTOPIC`, `DTCREATIONTOPIC`, `DTFERMETURE`)
-  VALUES ('".$user."', '".$topicName."', '".$topicDesc."', NOW(), NULL);";
-
-  $res = $bdd->prepare($query);
-  $res->execute();
-
-  return $res == null ? false : true;
-}
-
 ?>
