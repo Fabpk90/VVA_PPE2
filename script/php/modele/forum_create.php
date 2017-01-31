@@ -16,6 +16,21 @@
     return $res == null ? false : true;
   }
 
+  function addAutoToTopic($idTopic,$typeProfil)
+  {
+
+    global $bdd;
+
+    $query = "INSERT INTO `act_vva_ppe2`.`autorisation` (`TYPEPROFIL`, `IDTOPIC`)
+    VALUES ('".$typeProfil."', '".$idTopic."');";
+
+    $res = $bdd->prepare($query);
+    $res->execute();
+
+    return $res == null ? false : true;
+
+  }
+
   function getLastTopic()
   {
     global $bdd;
@@ -29,6 +44,21 @@
      $res->execute();
 
      return $res->fetch()['NBTOPIC'];
+  }
+
+  //renvoie la liste des profils
+  //les profils  sont utilisé pour l'autorisation, c'est pour ça
+  function getListTypeProfil()
+  {
+      global $bdd;
+
+      $query = "SELECT TYPEPROFIL, LIBTYPEPROFIL
+                FROM TYPEPROFIL";
+
+       $res = $bdd->prepare($query);
+       $res->execute();
+
+       return $res->fetchAll();
   }
 
  ?>
