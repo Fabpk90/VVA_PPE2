@@ -23,7 +23,7 @@ if(!isset($_GET['topic']))
 else
 {
     //contrôle si l'utilisateur peut voir le sujet
-    if(isTopicAccessible($_GET['topic'], $_SESSION['TYPEPROFiL']))
+    if(isTopicAccessible($_GET['topic'], $_SESSION['TYPEPROFIL']))
     {
         //si l'utilisateur a répondu, on inscrit sa rép et après on affiche le tout
         if(isset($_POST['post_rep']))

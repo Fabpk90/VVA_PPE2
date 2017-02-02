@@ -8,7 +8,8 @@ function getTopics()
   global $bdd;
 
   $query = "SELECT *
-            FROM TOPIC AS T";
+            FROM TOPIC AS T
+            ORDER BY DTCREATIONTOPIC DESC";
 
    $res = $bdd->prepare($query);
    $res->execute();
@@ -30,14 +31,14 @@ function getPosts($idTopic)
    return $res->fetchAll();
 }
 
-//on cherche si le profil est autorisé à voir le topic, si oui true sinon false
+//on cherche si le profil n'est pas dans la table, il est autorisé
 function isTopicAccessible($idTopic, $typeProfil)
 {
   global $bdd;
 
   $query = "SELECT *
             FROM AUTORISATION
-            WHERE TYPEPROFIL = '".$typeProfil."' AND IDTOPIC = ".$idTopic;
+            WHERE TYPEPROFIL = '".$typeProfil."' AND IDTOPIC = '".$idTopic."'";
 
    $res = $bdd->prepare($query);
    $res->execute();

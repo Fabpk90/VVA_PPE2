@@ -1,17 +1,27 @@
 <?php
   include_once('../modele/forum_create.php');
 
-
   if(isset($_POST['TITRE']))
   {
-    //create the topic
-    addTopic($_POST['TITRE'], $_POST['DESC'], $_SESSION['USER']);
 
-    $lastTopicID = getLastTopic();
+   $lastTopicID = getLastTopic();
 
-    addAutoToTopic($lastTopicID, $_SESSION['TYPEPROFiL']);
+   //create the topic
+   addTopic($_POST['TITRE'], $_POST['DESC'], $_SESSION['USER'], $lastTopicID+1);
+
+    $typeProfil = getListTypeProfil();
+
+    //tourne dynamiquement dans les choix
+    foreach ($typeProfil as $auto ) {
+      if($auto['TYPEPROFIL'] == $_POST['TYPEPROFIL'])
+        addAutoToTopic($lastTopicID, $auto['TYPEPROFIL']);
+    }
+
+
+
     addPost($lastTopicID, $_POST['TOPIC_CONT'], $_SESSION['USER']);
-
+    //ajoute le créteur aux autorisés
+    if(addAutoToTopic($lastTopicID, $_SESSION['TYPEPROFIL']))
     //post créé, redirection vers l'index
     header('Location: forum_index.php');
   }
@@ -29,18 +39,25 @@
 
               <?php
 
+              //le 0 = EN, c'est le seul à avoir l'autorisation de bloquer un topic
               //TO DO: mettre un truc dynamique pour l'auto
-              if($_SESSION['TYPEPROFiL'] == "EN")
+              if($_SESSION['TYPEPROFIL'] == "EN")
               {
-                echo ' Autorisation nécessaire pour voir le topic: <br/>';
-                echo '  <select name="type_auto">';
+                echo ' Autorisation nécessaire pour voir le topic (vous êtes inclut automatiquement) : <br/>';
 
                     $listAuto = getListTypeProfil();
 
-                    //le 0 = EN, c'est le seul à avoir l'autorisation de bloquer un topic
-                    echo '<option value="'.$listAuto[0]['TYPEPROFIL'].'"> '.$listAuto[0]['LIBTYPEPROFIL'].' </option>';
+                    //enlève le profil du créateur, il doit obligatoirement voir le topic
+                    //cherche son index et le supprime
+                    unset($listAuto[ array_search($_SESSION['TYPEPROFIL'], $listAuto) ]);
 
-                echo '  </select> <br/>';
+                    echo '<div class="radio">';
+
+                    foreach ($listAuto as $auto) {
+                      echo '<label><input type="radio" name="'.$auto['TYPEPROFIL'].'" value="'.$auto['TYPEPROFIL'].'">'.$auto['LIBTYPEPROFIL'].'</label> <br/>';
+                    }
+
+                    echo '</div>';
               }
               ?>
 

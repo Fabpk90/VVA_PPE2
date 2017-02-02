@@ -47,7 +47,7 @@ else if(isset($_POST['USER']) && isset($_POST['MDP']))
       $isEncadrant = getEncadrant($_POST['USER']);
 
       $_SESSION['USER'] = $_POST['USER'];
-      $_SESSION['TYPEPROFiL'] = getProfil($_SESSION['USER'])['TYPEPROFIL'];
+      $_SESSION['TYPEPROFIL'] = getProfil($_SESSION['USER'])['TYPEPROFIL'];
 
       if($isEncadrant != null)
       {

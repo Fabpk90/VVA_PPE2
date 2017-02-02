@@ -3,12 +3,12 @@
   //utilisé pour le addpost
   include_once("../modele/forum_topics.php");
 
-  function addTopic($topicName, $topicDesc, $user)
+  function addTopic($topicName, $topicDesc, $user, $idTopic)
   {
     global $bdd;
 
-    $query = "INSERT INTO `act_vva_ppe2`.`topic` (`USER`, `TITRETOPIC`, `DESCTOPIC`, `DTCREATIONTOPIC`, `DTFERMETURE`)
-    VALUES ('".$user."', '".$topicName."', '".$topicDesc."', NOW(), NULL);";
+    $query = "INSERT INTO TOPIC(IDTOPIC, USER, TITRETOPIC, DESCTOPIC, DTCREATIONTOPIC, DTFERMETURE)
+    VALUES('".$idTopic."', '".$user."', '".$topicName."', '".$topicDesc."', NOW(), NULL);";
 
     $res = $bdd->prepare($query);
     $res->execute();
