@@ -47,7 +47,11 @@ else if(isset($_POST['USER']) && isset($_POST['MDP']))
       $isEncadrant = getEncadrant($_POST['USER']);
 
       $_SESSION['USER'] = $_POST['USER'];
-      $_SESSION['TYPEPROFIL'] = getProfil($_SESSION['USER'])['TYPEPROFIL'];
+
+      $profil = getProfil($_SESSION['USER']);
+
+      $_SESSION['TYPEPROFIL'] = $profil['TYPEPROFIL'];
+      $_SESSION['AUTHNEWS'] = $profil['AUTORISATIONNEWS'];
 
       if($isEncadrant != null)
       {

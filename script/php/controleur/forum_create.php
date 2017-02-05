@@ -32,9 +32,9 @@
         <div class="form-group">
           <form id="forum" action="forum_create.php" method="post">
             Titre du topic: <br/>
-            <input  type="text"  name="TITRE" required><br/>
+            <input  type="text" minlength="5"  name="TITRE" required><br/>
             Description du topic: <br/>
-            <input  type="text" name="DESC" required> <br/>
+            <input  type="text" minlength="5" name="DESC" required> <br/>
 
 
               <?php

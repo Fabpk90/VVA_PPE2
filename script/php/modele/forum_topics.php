@@ -49,6 +49,23 @@ function isTopicAccessible($idTopic, $typeProfil)
    return $res != null ? true : false;
 }
 
+function isUserAuthor($user, $idTopic)
+{
+  global $bdd;
+
+  $query = "SELECT *
+            FROM TOPIC
+            WHERE USER = '".$user."' AND IDTOPIC = '".$idTopic."'";
+
+   $res = $bdd->prepare($query);
+   $res->execute();
+
+   $res = $res->fetch();
+
+   //si le profil n'est pas autorisé à supprimer ce topic -> false
+   return $res != null ? true : false;
+}
+
 function addPost($idTopic, $libPost, $user)
 {
   global $bdd;
@@ -68,5 +85,65 @@ function addPost($idTopic, $libPost, $user)
    $res->execute();
 
    return $res == null ? false : true;
+}
+
+function deleteTopic($idTopic)
+{
+  global $bdd;
+
+  //on supprime d'abord les poste, l'autorisation et après le topic
+  //(sinon problème de réference)
+  $query = "DELETE FROM POST
+            WHERE IDTOPIC = '".$idTopic."'";
+
+  $res = $bdd->prepare($query);
+  $res->execute();
+
+
+  $query = "DELETE FROM AUTORISATION
+            WHERE IDTOPIC = '".$idTopic."'";
+
+  $res = $bdd->prepare($query);
+  $res->execute();
+
+
+  $query = "DELETE FROM TOPIC
+            WHERE IDTOPIC = '".$idTopic."'";
+
+  $res = $bdd->prepare($query);
+  $res->execute();
+
+  return $res == null ? false : true;
+}
+
+function closeTopic($idTopic)
+{
+  global $bdd;
+
+  $query = "UPDATE TOPIC SET DTFERMETURE = NOW()
+            WHERE IDTOPIC ='".$idTopic."'";
+
+  $res = $bdd->prepare($query);
+  $res->execute();
+
+  $res = $res->fetch();
+
+  return $res == null ? false : true;
+}
+
+function isTopicOpen($idTopic)
+{
+  global $bdd;
+
+  $query = "SELECT *
+            FROM TOPIC
+            WHERE IDTOPIC = '".$idTopic."' AND DTFERMETURE IS NULL";
+
+  $res = $bdd->prepare($query);
+
+  $res->execute();
+  $res = $res->fetch();
+
+  return $res != null ? true : false;
 }
 ?>

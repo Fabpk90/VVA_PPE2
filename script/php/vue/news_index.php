@@ -1,6 +1,6 @@
 <?php
   include('../../../header.php');
-  include('../controleur/news.php');
+  include('../controleur/news_index.php');
 
 
 //global $message;
@@ -14,8 +14,8 @@ if(isset($news))
   foreach($news as $new)
   {
     echo '<article>';
-      echo '<p>Title of the news: '.$new['titre'].'</p>';
-      echo '<p>Wrote the: '.$new['date'].'</p>';
+      echo '<p>Titre: '.$new['titre'].'</p>';
+      echo '<p>Ecrit le: '.$new['date'].'</p>';
       echo $new['contenu'].'<br/>';
       if(isset($new['comm']))
         echo $new['comm'];
@@ -39,7 +39,7 @@ if(isset($news))
     echo '<p>No Comments here..</p>';
   }*/
 }
-else {
+else {//pas de news
   echo "salut";
 }
 
