@@ -68,8 +68,8 @@
     global $bdd;
 
     $query = "SELECT *
-              FROM PROFIL AS P
-              WHERE P.USER = '".$user."'";
+              FROM PROFIL AS P, TYPEPROFIL AS T
+              WHERE P.USER = '".$user."' AND T.TYPEPROFIL = P.TYPEPROFIL";
 
      $res = $bdd->prepare($query);
      $res->execute();

@@ -12,7 +12,7 @@ if(!isset($_GET['topic']))
 
   foreach ($topics as $topic) {
     echo '<div class="article">';
-      echo '<h3 ><a href="forum_topics.php?topic='.$topic['IDTOPIC'].'" >'.$topic['TITRETOPIC']." </a>";
+      echo '<h3 ><a class="btn-primary btn-lg" href="forum_topics.php?topic='.$topic['IDTOPIC'].'" >'.$topic['TITRETOPIC']." </a>";
 
       if(!isTopicOpen($topic['IDTOPIC']))
       {

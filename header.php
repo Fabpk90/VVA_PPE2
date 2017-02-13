@@ -18,13 +18,20 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="navbar-text" ><a href="news.php">News </a></li>
+        <li class="navbar-text" ><a href="news_index.php">News </a></li>
         <li class="navbar-text"><a href="forum_index.php">Forum</a></li>
         <?php
         if(isset($_SESSION['USER']))
         {
           echo '<div class="navbar-text navbar-right">';
             echo '<h4 class="navbar-text"> Bienvenue! '.$_SESSION['USER'].' </h4>';
+
+            if(isset($_SESSION['AUTHNEWS']) && $_SESSION['AUTHNEWS'])
+            {
+              echo '<p class="navbar-text"><a href="news_create.php"> Nouvelle News</a> </p>';
+            }
+
+
             echo '<p class="navbar-text"><a href="forum_create.php"> Nouveau Topic</a> </p>';
             echo '<p class="navbar-text"><a href="deconnexion.php"> Déconnexion</a> </p>';
           echo '</div>';

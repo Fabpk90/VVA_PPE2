@@ -15,7 +15,15 @@ if(isset($news))
   {
     echo '<article>';
       echo '<p>Titre: '.$new['titre'].'</p>';
+      if($_SESSION['TYPEPROFIL'] == "EN" || isUserAuthorNews($_SESSION['USER'], $new['IDNEWS']) )
+      {
+          echo '<a href="news_index.php?idnews='.$new['IDNEWS'].'&delete=1" > Supprimer la news </a>';
+          echo '<a href="news_index.php?idnews='.$new['IDNEWS'].'&delete=2" > Modifier la news </a>';
+      }
+
+
       echo '<p>Ecrit le: '.$new['date'].'</p>';
+       echo '<p>Par: '.$new['NOMPROFIL'].' '.$new['PRENOMPROFIL'].'</p>';
       echo $new['contenu'].'<br/>';
       if(isset($new['comm']))
         echo $new['comm'];

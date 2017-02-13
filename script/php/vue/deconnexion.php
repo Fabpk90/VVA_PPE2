@@ -6,5 +6,5 @@
 
 
 
-  header('Location: news.php');
+  header('Location: news_index.php');
  ?>
