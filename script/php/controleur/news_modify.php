@@ -21,7 +21,7 @@ if(isset($_GET['idnews']))
                     <input name="DTNEWS" type="date" value="<?php  print($news['DTNEWS']); ?>" required/> <br/>
 
                     Contenu de la news <br/>
-                    <textarea name="CONTNEWS" form="form" rows="10" cols="50" style="width: 100%;" value="<?php echo $news['LIBNEWS']; ?>" required></textarea> <br/>
+                    <textarea name="CONTNEWS" form="form" rows="10" cols="50" style="width: 100%;"  required><?php print($news['LIBNEWS']); ?></textarea> <br/>
 
                     <button type="submit" class="btn btn-default"> Mettre à jour la news</button>
                 </form>
