@@ -4,16 +4,11 @@ include('../modele/news_index.php');
 //suppression/édition d'une news?
 if(isset($_GET['delete']))
 {
-    if($_SESSION['TYPEPROFIL'] == "EN" || isUserAuthorNews($_SESSION['USER'], $_GET['delete']) )
+    if(isUserAuthorNews($_SESSION['USER'], $_GET['delete']) )
     {
         if($_GET['delete'] == 1)
         {
-            echo "qsd";
             delete_news($_GET['idnews']);
-        }
-        elseif($_GET['delete'] == 2)
-        {
-            //edit
         }
     }
 

@@ -2,18 +2,6 @@
 
 include_once("connectionBDD.php");
 
-function update_news($newsID, $news_titre, $news_date, $news_contenu)
-{
-  global $bdd;
-
-  $req = $bdd->prepare("UPDATE NEWS
-                        SET NEWS_TITRE = '".$news_titre."', NEWS_DATE = '".$news_date."', NEWS_CONTENU = '".$news_contenu."'
-                        WHERE NEWS_ID =".$newsID);
-
-  $req->execute();
-
-  return $req == null ? false : true;
-}
 
 function add_comm($newsID, $user_id, $comm_texte)
 {

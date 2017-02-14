@@ -4,9 +4,7 @@ include_once("../modele/news_create.php");
 
 if(isset($_POST['TITLENEWS']))
 {
-    add_news($_POST['TITLENEWS'], $_POST['DESCNEWS'], $_POST['CONTNEWS'], $_SESSION['USER']);
-
-    
+    add_news($_POST['TITLENEWS'], $_POST['DTNEWS'], $_POST['CONTNEWS'], $_SESSION['USER']);
 }
 else
 {
@@ -17,11 +15,8 @@ else
             Titre de la news <br/>
             <input name="TITLENEWS" type="text" minlength="5" required/> <br/>
 
-            Description de la news <br/>
-            <input name="DESCNEWS" type="text" minlength="5" required/> <br/>
-
             Date de la news <br/>
-            <input name="DESCNEWS" type="date" value="<?php  print(date("Y-m-d")); ?>" required/> <br/>
+            <input name="DTNEWS" type="date" value="<?php  print(date("Y-m-d")); ?>" required/> <br/>
 
             Contenu de la news <br/>
             <textarea name="CONTNEWS" form="form" rows="10" cols="50" style="width: 100%;" required></textarea> <br/>

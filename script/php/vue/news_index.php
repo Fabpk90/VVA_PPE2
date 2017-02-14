@@ -18,7 +18,7 @@ if(isset($news))
       if($_SESSION['TYPEPROFIL'] == "EN" || isUserAuthorNews($_SESSION['USER'], $new['IDNEWS']) )
       {
           echo '<a href="news_index.php?idnews='.$new['IDNEWS'].'&delete=1" > Supprimer la news </a>';
-          echo '<a href="news_index.php?idnews='.$new['IDNEWS'].'&delete=2" > Modifier la news </a>';
+          echo '<a href="news_modify.php?idnews='.$new['IDNEWS'].'" > Modifier la news </a>';
       }
 
 

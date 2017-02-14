@@ -55,7 +55,7 @@ function get_single_news($newsID)
 {
   global $bdd;
 
-  $req = $bdd->prepare('SELECT DTNEWS, LIBNEWS, TITRENEWS FROM NEWS WHERE IDNEWS ='.$newsID);
+  $req = $bdd->prepare('SELECT * FROM NEWS WHERE IDNEWS ='.$newsID);
 
   $req->execute();
   $news = $req->fetch();
@@ -77,6 +77,9 @@ function get_comm_news($newsID)
 
 function isUserAuthorNews($userID, $newsID)
 {
+    if($_SESSION['TYPEPROFIL'] == "EN")
+        return true;
+
     global $bdd;
 
     $req = $bdd->prepare("SELECT TITRENEWS
