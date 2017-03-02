@@ -7,34 +7,42 @@
 //echo $message;
 
 ?>
-<div class="text-center">
-<?php
-if(isset($news))
-{
-  foreach($news as $new)
-  {
-    echo '<article>';
-      echo '<p>Titre: '.$new['titre'].'</p>';
-      if($_SESSION['TYPEPROFIL'] == "EN" || isUserAuthorNews($_SESSION['USER'], $new['IDNEWS']) )
+<div class="container-fluid">
+
+    <div class="text-center">
+    <?php
+    if(isset($news))
+    {
+      foreach($news as $new)
       {
-          echo '<a href="news_index.php?idnews='.$new['IDNEWS'].'&delete=1" > Supprimer la news </a>';
-          echo '<a href="news_modify.php?idnews='.$new['IDNEWS'].'" > Modifier la news </a>';
+        echo '<div class="panel panel-primary">';
+            echo '<div class="panel-heading">';
+                  echo '<p>'.$new['titre'].'</p>';
+            echo '</div>';
+                  if($_SESSION['TYPEPROFIL'] == "EN" || isUserAuthorNews($_SESSION['USER'], $new['IDNEWS']) )
+                  {
+                      echo '<a href="news_index.php?idnews='.$new['IDNEWS'].'&delete=1" > Supprimer la news </a>';
+                      echo '<a href="news_modify.php?idnews='.$new['IDNEWS'].'" > Modifier la news </a>';
+                  }
+
+
+                  echo '<p>Ecrit le: '.$new['date'].'</p>';
+
+                  echo '<div class="panel-body">';
+                    echo '<p>Par: '.$new['NOMPROFIL'].' '.$new['PRENOMPROFIL'].'</p>';
+
+            echo '</div>';
+          echo $new['contenu'].'<br/>';
+          if(isset($new['comm']))
+            echo $new['comm'];
+        echo '</div> <br/>';
       }
+      if(isset($commentForm))
+        echo $commentForm;
+    ?>
 
-
-      echo '<p>Ecrit le: '.$new['date'].'</p>';
-       echo '<p>Par: '.$new['NOMPROFIL'].' '.$new['PRENOMPROFIL'].'</p>';
-      echo $new['contenu'].'<br/>';
-      if(isset($new['comm']))
-        echo $new['comm'];
-    echo '</article> <br/>';
-  }
-  if(isset($commentForm))
-    echo $commentForm;
-?>
-
-</div>
-
+    </div>
+</div><!-- container -->
 <?php
 /*  global $commentaires;
   //affiche les commentaires si présents
