@@ -10,7 +10,22 @@
     <link href="../../css/bootstrap.css" rel="stylesheet">
     <script src="../../js/jquery.min.js"></script>
     <script src="../../js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="../../js/bbparser/minified/themes/default.min.css" />
+    <script src="../../js/bbparser/minified/jquery.sceditor.bbcode.min.js"></script>
+    <script src="../../js/bbparser/languages/fr.js"></script>
   </head>
+
+  <script>
+$(function() {
+    // Replace all textarea tags with SCEditor
+    $('textarea').sceditor({
+        plugins: 'xhtml',
+        style: '../../js/bbparser/minified/jquery.sceditor.default.min.css',
+        locale: 'fr'
+    });
+});
+</script>
 
 <nav class="navbar navbar-default">
   <div class="container-fluid">
