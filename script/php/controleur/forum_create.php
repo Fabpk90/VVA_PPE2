@@ -3,27 +3,31 @@
 
   if(isset($_POST['TITRE']))
   {
-
    $lastTopicID = getLastTopic();
 
    //create the topic
    addTopic($_POST['TITRE'], $_POST['DESC'], $_SESSION['USER'], $lastTopicID+1);
 
-    $typeProfil = getListTypeProfil();
+   $typeProfil = getListTypeProfil();
 
-    //tourne dynamiquement dans les choix
-    foreach ($typeProfil as $auto ) {
-      if($auto['TYPEPROFIL'] == $_POST['TYPEPROFIL'])
-        addAutoToTopic($lastTopicID, $auto['TYPEPROFIL']);
+    //je tourne dans toutes les checkbox
+    //vu qu'il y a une correspondance 1:1, on peut ajouter l'autorisation direct si elle est checkée(checkbox)
+
+    for($i = 0; $i < $_SESSION['nbProfil']; ++$i)
+    {
+        if(isset($_POST[''.$i]))
+        {
+            addAutoToTopic($lastTopicID, $typeProfil[''.$i]['TYPEPROFIL']);
+        }
     }
 
-
+    print_r($_POST);
 
     addPost($lastTopicID, $_POST['TOPIC_CONT'], $_SESSION['USER']);
     //ajoute le créteur aux autorisés
     if(addAutoToTopic($lastTopicID, $_SESSION['TYPEPROFIL']))
-    //post créé, redirection vers l'index
-    header('Location: forum_index.php');
+        //post créé, redirection vers l'index
+        header('Location: forum_index.php');
   }
   else
   {  //post non créé, donc création du formulaire
@@ -43,7 +47,7 @@
               //TO DO: mettre un truc dynamique pour l'auto
               if($_SESSION['TYPEPROFIL'] == "EN")
               {
-                echo ' Autorisation nécessaire pour voir le topic (vous êtes inclut automatiquement) : <br/>';
+                echo ' Autorisation nécessaire pour voir le topic (vous êtes autorisé automatiquement) : <br/>';
 
                     $listAuto = getListTypeProfil();
 
@@ -53,9 +57,15 @@
 
                     echo '<div class="radio">';
 
+                    //créer dynamiquement des checkbox pour les auto
+                    $i = 0;
+
                     foreach ($listAuto as $auto) {
-                      echo '<label><input type="radio" name="'.$auto['TYPEPROFIL'].'" value="'.$auto['TYPEPROFIL'].'">'.$auto['LIBTYPEPROFIL'].'</label> <br/>';
+                      echo '<label><input type="checkbox" name="'.$i.'" value="'.$auto['TYPEPROFIL'].'"/>'.$auto['LIBTYPEPROFIL'].'</label> <br/>';
+                      $i++;
                     }
+
+                    $_SESSION['nbProfil'] = $i;
 
                     echo '</div>';
               }

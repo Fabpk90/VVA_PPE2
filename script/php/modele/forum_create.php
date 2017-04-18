@@ -27,6 +27,8 @@
     $res = $bdd->prepare($query);
     $res->execute();
 
+    //print_r($res->errorInfo());
+
     return $res == null ? false : true;
 
   }

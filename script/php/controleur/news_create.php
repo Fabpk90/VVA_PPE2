@@ -5,6 +5,7 @@ include_once("../modele/news_create.php");
 if(isset($_POST['TITLENEWS']))
 {
     add_news($_POST['TITLENEWS'], $_POST['DTNEWS'], $_POST['CONTNEWS'], $_SESSION['USER']);
+    echo "News ajoutée";
 }
 else
 {
@@ -21,7 +22,7 @@ else
             Contenu de la news <br/>
             <textarea name="CONTNEWS" form="form" rows="10" cols="50" style="width: 100%;" required></textarea> <br/>
 
-            <button type="submit" class="btn btn-default"> Créer la news</button>
+            <button type="submit" class="btn btn-primary"> Créer la news</button>
         </form>
     </div>
 </div>

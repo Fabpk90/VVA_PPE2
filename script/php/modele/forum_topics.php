@@ -87,6 +87,26 @@ function addPost($idTopic, $libPost, $user)
    return $res == null ? false : true;
 }
 
+//renvoie le nombre de page pour le topic, divise le nombre de post en param
+function getTopicNbPage($idTopic, $postByPage)
+{
+    global $bdd;
+
+    $query = "SELECT COUNT(P.IDTOPIC) AS NBPOST
+              FROM TOPIC AS T, POST AS P
+              WHERE T.IDTOPIC = '".$idTopic."' AND T.IDTOPIC = P.IDTOPIC";
+
+     $res = $bdd->prepare($query);
+     $res->execute();
+
+     $res = $res->fetch();
+     print_r($res);
+
+    $nbPost = $res['NBPOST'] / $postByPage;
+
+    return $nbPost;
+}
+
 function deleteTopic($idTopic)
 {
   global $bdd;

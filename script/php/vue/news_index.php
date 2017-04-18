@@ -17,21 +17,19 @@
       {
         echo '<div class="panel panel-primary">';
             echo '<div class="panel-heading">';
-                  echo '<p>'.$new['titre'].'</p>';
+                  echo '<h3>'.$new['titre'].'</h3>';
             echo '</div>';
-                  if($_SESSION['TYPEPROFIL'] == "EN" || isUserAuthorNews($_SESSION['USER'], $new['IDNEWS']) )
-                  {
-                      echo '<a href="news_index.php?idnews='.$new['IDNEWS'].'&delete=1" > Supprimer la news </a>';
-                      echo '<a href="news_modify.php?idnews='.$new['IDNEWS'].'" > Modifier la news </a>';
-                  }
+                if(isset($_SESSION['TYPEPROFIL']))
+                {
+                    if($_SESSION['TYPEPROFIL'] == "EN" || isUserAuthorNews($_SESSION['USER'], $new['IDNEWS']) )
+                    {
+                        echo '<a class="btn btn-danger" href="news_index.php?idnews='.$new['IDNEWS'].'&delete=1" > Supprimer la news </a>';
+                        echo '<a class="btn btn-warning" href="news_modify.php?idnews='.$new['IDNEWS'].'" > Modifier la news </a>';
+                    }
+                }
+                  echo '<p>Par: '.$new['NOMPROFIL'].' '.$new['PRENOMPROFIL'].'  le: '.$new['date'].'</p>';
 
 
-                  echo '<p>Ecrit le: '.$new['date'].'</p>';
-
-                  echo '<div class="panel-body">';
-                    echo '<p>Par: '.$new['NOMPROFIL'].' '.$new['PRENOMPROFIL'].'</p>';
-
-            echo '</div>';
           echo $new['contenu'].'<br/>';
           if(isset($new['comm']))
             echo $new['comm'];
