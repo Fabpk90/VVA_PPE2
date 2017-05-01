@@ -1,5 +1,8 @@
 <?php
   session_start();
+
+include_once("script/php/modele/vitrine_index.php");
+
  ?>
 
 <!DOCTYPE html>
@@ -35,21 +38,32 @@ $(function() {
       <ul class="nav navbar-nav">
         <li class="navbar-text" ><a href="news_index.php">News </a></li>
         <li class="navbar-text"><a href="forum_index.php">Forum</a></li>
+        <li class="navbar-text"><a href="vitrine_anim.php">Consulter les animations</a></li>
         <?php
         if(isset($_SESSION['USER']))
         {
           echo '<div class="navbar-text navbar-right">';
-            echo '<h3 class="navbar-text"> Bienvenue '.$_SESSION['USER'].'! </h3>';
+            echo '<h4 class="navbar-text"> Bienvenue '.$_SESSION['USER'].'! </h4>';
 
             if(isset($_SESSION['AUTHNEWS']) && $_SESSION['AUTHNEWS'])
             {
               echo '<p class="navbar-text"><a href="news_create.php"> Créer une News</a> </p>';
+              echo '<p class="navbar-text"><a href="vitrine_index.php"> Gestion des pages</a> </p>';
             }
 
             echo '<p class="navbar-text"><a href="forum_create.php"> Créer un Topic</a> </p>';
             echo '<p class="navbar-text"><a href="deconnexion.php"> Déconnexion</a> </p>';
           echo '</div>';
         }
+
+        //populating the list of pages
+
+        $pages = getAllPages();
+
+        foreach ($pages as $page) {
+            echo '<li class="navbar-text"><a href="vitrine_index.php?page='.$page['IDPAGE'].'">'.$page['NOMPAGE'].'</a></li>';
+        }
+
         ?>
       </ul>
     </div><!-- /.navbar-collapse -->

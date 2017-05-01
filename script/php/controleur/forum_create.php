@@ -21,8 +21,6 @@
         }
     }
 
-    print_r($_POST);
-
     addPost($lastTopicID, $_POST['TOPIC_CONT'], $_SESSION['USER']);
     //ajoute le créteur aux autorisés
     if(addAutoToTopic($lastTopicID, $_SESSION['TYPEPROFIL']))
