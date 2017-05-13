@@ -32,14 +32,14 @@ $nbPlace = getNbPlacesLibres($anim['CODEANIM']);
 
 echo "<tr>";
     echo "
-         <td>".$anim['NOMANIM']."</td>
+         <td>"; echo '<a href="vitrine_act.php?anim='.$anim['CODEANIM'].'" data-toggle="tooltip" title="Cliquez sur l\'animation pour voir ses activités">'; echo $anim['NOMANIM']."</td>
          <td>".$anim['DUREEANIM']."</td>
          <td>".$anim['LIMITEAGE']."</td>
          <td>".$anim['TARIFANIM']."</td>
          <td>".$nbPlace."</td>
          <td>".$anim['DESCRIPTANIM']."</td>
          <td>".$anim['COMMENTANIM']."</td>
-         <td>".$difficulte[$anim['DIFFICULTEANIM']]."</td>
+         <td>".$difficulte[ $anim['DIFFICULTEANIM'] ]."</td>
          ";
 echo "</tr>";
 }

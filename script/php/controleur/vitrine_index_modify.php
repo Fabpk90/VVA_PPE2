@@ -7,7 +7,7 @@ if(isset($_GET['page'])) //modification de la page
     if(isset($_GET['do'])) // suppression
     {
         deletePage($_GET['page']);
-        header('Location: vitrine_index.php');      
+        header('Location: vitrine_index.php');
     }
     else
     {
@@ -26,7 +26,7 @@ if(isset($_GET['page'])) //modification de la page
                     <textarea name="CONTENUPAGE" form="form" rows="10" cols="50" style="width: 100%;"
                         required><?php echo $page['CONTENUPAGE']; ?></textarea> <br/>
 
-                    <button type="submit" class="btn btn-primary"> Ajouter la page</button>
+                    <button type="submit" class="btn btn-primary"> Modifier la page</button>
                 </form>
             </div>
         </div>
