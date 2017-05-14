@@ -29,7 +29,7 @@ else if(isset($_POST['USER']) && isset($_POST['MDP']))
     }
     else
     {
-        echo '<div class="alert alert-warning col-md-3 text-center ">';
+        echo '<div class="alert alert-warning col-md-3  ">';
             echo "Les infomations ne sont pas correctes!";
         echo "</div>";
     }

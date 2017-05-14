@@ -5,7 +5,7 @@ echo '<div class="container-fluid">';
 
 $anims = getAllAnim();
 
-echo '<table class="table">';
+echo '<table class="table table-responsive table-hover">';
 
 ?>
 <thead>
